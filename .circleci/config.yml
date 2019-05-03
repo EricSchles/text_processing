@@ -46,6 +46,12 @@ jobs:
             . venv/bin/activate
             python -m pip install pytest --user
       - run:
+          name: Install spacy dependencies
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            python -m spacy download en_core_web_sm
+      - run:
           name: Install library
           command: |
             python3 -m venv venv
