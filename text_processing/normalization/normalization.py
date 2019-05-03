@@ -1,6 +1,7 @@
 from spellchecker import SpellChecker
 import spacy
 import en_core_web_sm
+import copy
 
 class NormalizeText:
     def __init__(self,
@@ -13,7 +14,7 @@ class NormalizeText:
         self.norm_case = norm_case
         self.text = None
         self.initialize_spellchecker()
-
+        
     def normalize_case(self):
         """
         standardize case to lower case for all characters.
@@ -49,7 +50,7 @@ class NormalizeText:
         """
         tokens = self.text.split()
         misspelled = self.spell_checker.unknown(tokens)
-        self.text = " ".join(
+        self.transformed_text = " ".join(
             [self.spell_checker.correction(word)
              for word in misspelled]
         )
@@ -59,8 +60,8 @@ class NormalizeText:
         Corrects the whitespace in text, so that 
         there is one white space between each word.
         """
-        self.text = ' '.join(self.text.strip().split())
-        
+        self.text = " ".join(self.text.strip().split())
+
     def fit(self, text):
         """
         save the text to the model for preprocessing
