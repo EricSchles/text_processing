@@ -53,17 +53,29 @@ class NormalizeText:
         self.text = ' '.join(self.text.strip.split())
         
     def fit(self, text):
+        """
+        save the text to the model for preprocessing
+        
+        Parameters
+        ----------
+        text - the text to be transformed by transform method
+        saved to [OBJECT NAME].text
+        """
         self.text = text
 
     def transform(self):
+        """
+        calls all transformers that have been specified
+        requires you to call [OBJECT NAME].text first
+        """
         if not self.text:
             raise Exception("fit some text first with the fit method")
-        else:
+        if self.check_whitespace:
             self.correct_whitespace()
+        if self.check_spelling:
             self.correct_spelling()
+        return self.text
             
     def fit_transform(self, text):
         self.fit(text)
         return self.transform()
-
-    def 
