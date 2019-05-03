@@ -50,7 +50,7 @@ class NormalizeText:
         Corrects the whitespace in text, so that 
         there is one white space between each word.
         """
-        self.text = ' '.join(self.text.strip.split())
+        self.text = ' '.join(self.text.strip().split())
         
     def fit(self, text):
         """
