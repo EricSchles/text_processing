@@ -1,0 +1,6 @@
+from text_processing.normalization import NormalizeText
+
+def test_correct_whitespace():
+    norm = NormalizeText(check_whitespace=True)
+    norm.fit("Hello there friends")
+    assert norm.transform() == "Hello there friends"

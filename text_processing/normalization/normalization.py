@@ -6,12 +6,20 @@ class NormalizeText:
     def __init__(self,
                  check_whitespace=False,
                  check_spelling=False,
+                 norm_case=False
     ):
         self.check_spelling = check_spelling
         self.check_whitespace = check_whitespace
+        self.norm_case = norm_case
         self.text = None
         self.initialize_spellchecker()
 
+    def normalize_case(self):
+        """
+        standardize case to lower case for all characters.
+        """
+        self.text = self.text.lower()
+        
     def initialize_spellchecker(self, words=[], add_ner=False):
         """
         * Initializes the spellchecker and allows for 
@@ -22,6 +30,7 @@ class NormalizeText:
         add_ner - add all words found in the text that are named entities
         to the list of words to not adjust
         """
+        nlp = en_core_web_sm.load()
         if add_ner:
             doc = nlp(self.text)
             words += [entity.text
@@ -74,6 +83,8 @@ class NormalizeText:
             self.correct_whitespace()
         if self.check_spelling:
             self.correct_spelling()
+        if self.norm_case:
+            self.normalize_case()
         return self.text
             
     def fit_transform(self, text):
