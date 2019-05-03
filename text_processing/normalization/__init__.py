@@ -1,3 +1,3 @@
-# from .normalization import *
+from .normalization import NormalizeText
 
-__all__ = []
+__all__ = ["NormalizeText"]
