@@ -124,7 +124,8 @@ class NormalizeText:
         misspelled = self.spell_checker.unknown(tokens)
         words = []
         for word in misspelled:
-            word, punctuation = self.strip_punctuation(word)
+            word, punctuation = self.strip_punctuation(word,
+                                                       return_punctuation=True)
             new_word = self.spell_checker.correction(word)
             new_word += punctuation
             words.append(new_word)
