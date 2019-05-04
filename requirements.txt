@@ -2,3 +2,4 @@ pyspellchecker
 spacy
 sklearn
 pytest
+jellyfish
