@@ -71,7 +71,7 @@ jobs:
       - run: 
           name: run codecov
           command: |
-            curl -s https://codecov.io/bash | bash -s - -t 6875d787-f809-4e64-909b-c672e8845796        
+            curl -s https://codecov.io/bash | bash -s - -t 90e48af9-90e4-4e06-81ee-7b1a6cb24746        
       - store_artifacts:
           path: ./tests/htmlcov
           destination: ./tests/htmlcov
