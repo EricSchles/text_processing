@@ -23,8 +23,19 @@ def test_initialize_spellchecker_simple():
     except:
         assert False
 
+def test_correct_spelling_simple():
+    norm = NormalizeText()
+    norm.initialize_spellchecker()
+    assert norm.correct_spelling("thare") == "there"
+
 def test_add_stopwords():
     norm = NormalizeText()
     norm.add_to_stopwords(words=["goat", "bob", "phil"])
-    assert norm.remove_stopwords("Hey bob, get the goat from phil") == "Hey"
+    assert "goat" in norm.stopwords
+    assert "bob" in norm.stopwords
+    assert "phil" in norm.stopwords
+
+def test_stopwords():
+    norm = NormalizeText()
+    assert norm.remove_stopwords("the friends play a ball game") == "friends play ball game"
 
