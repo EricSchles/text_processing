@@ -1,2 +1,4 @@
 pyspellchecker
 spacy
+sklearn
+pytest
