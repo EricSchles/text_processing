@@ -9,12 +9,12 @@ README = (HERE / "README.md").read_text()
 
 # This call to setup() does all the work
 setup(
-    name="text_processing",
-    version="0.1",
+    name="text_processing_ml",
+    version="0.1.2",
     description="Testing for models confirming to the scikit-learn api",
     long_description=README,
     long_description_content_type="text/markdown",
-    url="https://github.com/EricSchles/text_processing",
+    url="https://github.com/EricSchles/text_processing_ml",
     author="Eric Schles",
     author_email="ericschles@gmail.com",
     license="MIT",
@@ -24,10 +24,10 @@ setup(
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
     ],
-    packages=['text_processing',
-              'text_processing.normalization',
-              'text_processing.matching',
-              'text_processing.parsing'
+    packages=['text_processing_ml',
+              'text_processing_ml.normalization',
+              'text_processing_ml.matching',
+              'text_processing_ml.parsing'
     ],
     include_package_data=True,
     install_requires=["spacy", "nltk", "pyspellchecker"],
