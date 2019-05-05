@@ -1,3 +1,0 @@
-class ParseText:
-    def __init__(self):
-        pass
