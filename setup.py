@@ -24,7 +24,11 @@ setup(
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
     ],
-    packages=['text_processing', 'text_processing.normalization'],
+    packages=['text_processing',
+              'text_processing.normalization',
+              'text_processing.matching',
+              'text_processing.parsing'
+    ],
     include_package_data=True,
     install_requires=["spacy", "nltk", "pyspellchecker"],
 )
