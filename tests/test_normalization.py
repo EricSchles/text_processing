@@ -1,4 +1,4 @@
-from text_processing.normalization import NormalizeText
+from text_processing_ml.normalization import NormalizeText
 
 def test_strip_punctuation():
     norm = NormalizeText()
