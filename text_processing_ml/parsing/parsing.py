@@ -36,8 +36,6 @@ class ParseText:
 
     
     # to do
-    # add spell checker
-    # add tfidf
     # add text summarization
     # add topic modeling, as well as topic assignment,
     # from a topic model
