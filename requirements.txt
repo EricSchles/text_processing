@@ -1,4 +1,4 @@
-pyspellchecker
+spellchecker-ml
 spacy
 sklearn
 pytest

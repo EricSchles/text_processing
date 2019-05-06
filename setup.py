@@ -10,8 +10,8 @@ README = (HERE / "README.md").read_text()
 # This call to setup() does all the work
 setup(
     name="text_processing_ml",
-    version="0.1.2",
-    description="Testing for models confirming to the scikit-learn api",
+    version="0.1.4",
+    description="A library for processing text for machine learning",
     long_description=README,
     long_description_content_type="text/markdown",
     url="https://github.com/EricSchles/text_processing_ml",
@@ -30,5 +30,5 @@ setup(
               'text_processing_ml.parsing'
     ],
     include_package_data=True,
-    install_requires=["spacy", "nltk", "pyspellchecker"],
+    install_requires=["spacy", "nltk", "spellchecker-ml"],
 )
