@@ -1,4 +1,4 @@
-from spellchecker import SpellChecker
+from spellchecker_ml.spellchecker_ml import SpellCheckerML
 import spacy
 from sklearn.feature_extraction.stop_words import ENGLISH_STOP_WORDS as stopwords
 import en_core_web_sm
@@ -47,24 +47,38 @@ class NormalizeText:
         """
         return text.lower()
         
-    def initialize_spellchecker(self, text='', words=[], add_ner=False):
+    def initialize_spellchecker(self, corpus='',
+                                corpus_name=False,
+                                words=[],
+                                ner_text='',
+                                add_ner=False):
         """
         * Initializes the spellchecker and allows for 
         words that are proper knowns.
         Parameters
         ----------
+        corpus - a corpus of text to train the spell checker on
+
+        corpus_name - the name of the corpus for saving the model
+        if corpus_name is blank then the model will not be saved
+
+        ner_text - text to parse for named entities
+
         words - a custom list of words to not adjust
+
         add_ner - add all words found in the text 
         that are named entities to the list of words 
         to not adjust
         """
         nlp = en_core_web_sm.load()
-        if add_ner:
+        if add_ner and text:
             doc = nlp(text)
             words += [entity.text
                       for entity in doc.ents]
-        self.spell_checker = SpellChecker()
-        self.spell_checker.word_frequency.load_words(words)
+        self.spell_checker = SpellCheckerML()
+        self.spell_checker.spell_checker.word_frequency.load_words(words)
+        if corpus:
+            self.spell_checker.train(corpus, model_name=corpus_name)
 
     def strip_punctuation(self, word, return_punctuation=False):
         """
@@ -103,32 +117,18 @@ class NormalizeText:
         ------
         Spell checked string
         """
-
-        # This is enough work that it should be its
-        # own library.  
-        # Making the spell checking better -
-        # predict the next word based on the
-        # previous words in the sentence
-        # if previous words not available
-        # use the next word and run through the
-        # list of possible candidates
-        # whatever word has the highest probability of
-        # coming next, use that word
-        # features to use -
-        # word embedding?
-        # ngrams?
-        # tfidf?
-        # BERT?
         
         tokens = text.split()
-        misspelled = self.spell_checker.unknown(tokens)
         words = []
-        for word in misspelled:
-            word, punctuation = self.strip_punctuation(word,
+        for token in tokens:
+            word, punctuation = self.strip_punctuation(token,
                                                        return_punctuation=True)
             new_word = self.spell_checker.correction(word)
-            new_word += punctuation
-            words.append(new_word)
+            if new_word != word:
+                new_word += punctuation
+                words.append(new_word)
+            else:
+                words.append(token)
         return " ".join(words)
         
     def correct_whitespace(self, text: str) -> str:
