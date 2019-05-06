@@ -196,6 +196,23 @@ parser.tokenize(&quot;Hello there friends&quot;) # [&quot;Hello&quot;, &quot;the
 <p>Normalize the a piece of text by lower casing it and removing punctuation</p>
 <p>usage:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>```
+from text_processing_ml.parsing import ParseText
+
+parser = ParseText()
+parser.normalize_text(&quot;Hello there, friend&quot;) # returns hello there friend
+```
+</pre></div>
+</div>
+<p>__method__ tfidf(documents: list)</p>
+<p>Returns the Term frequency given the inverse document frequency</p>
+<p>usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>```
+from text_processing_ml.parsing import ParseText
+
+parser = ParseText()
+parser.tfidf([&quot;Hello there friends&quot;, &quot;How are you doing?&quot;, &quot;what&#39;s up&quot;])
+# returns the term frequency matrix
+```
 </pre></div>
 </div>
 </div>

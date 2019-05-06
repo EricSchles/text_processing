@@ -183,4 +183,25 @@ Normalize the a piece of text by lower casing it and removing punctuation
 
 usage::
 
-```
+	```
+	from text_processing_ml.parsing import ParseText
+
+	parser = ParseText()
+	parser.normalize_text("Hello there, friend") # returns hello there friend
+	```
+
+__method__ tfidf(documents: list) 
+
+Returns the Term frequency given the inverse document frequency
+
+usage::
+	
+	```
+	from text_processing_ml.parsing import ParseText
+
+	parser = ParseText()
+	parser.tfidf(["Hello there friends", "How are you doing?", "what's up"])
+	# returns the term frequency matrix
+	```
+
+	
