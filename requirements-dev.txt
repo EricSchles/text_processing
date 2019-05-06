@@ -1,4 +1,5 @@
 spellchecker-ml
+scikit-learn
 spacy
 pytest
 nltk
