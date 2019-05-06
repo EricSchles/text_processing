@@ -32,7 +32,31 @@ class MatchText:
                 )
         return list(set(final_list))
 
-    def match_lists(self, lists: list, text: str, ordered: bool=True):
+    def filter_by_length(self, substrings: list, substring_len: int) -> list:
+        """
+        Filter the substrings by their length
+        
+        Paramters
+        ---------
+        substrings - a list of substrings of various lengths
+        substring_len - the filter criteria of the function
+        return substrings only matching this length
+        if substring_len == -1 return all substrings
+        
+        Output
+        ------
+        return the filtered list of substrings
+        """
+        if substring_len == -1:
+            return substrings
+        else:
+            new_substrings = []
+            for substring in substrings:
+                if len(substring) == substring_len:
+                    new_substrings.append(substring)
+            return new_substrings
+        
+    def match_lists(self, lists: list, text: str, substring_len: int, ordered: bool=True):
         """
         search a piece of text for all possible
         combinations of all tokens of a set of lists.
@@ -41,10 +65,16 @@ class MatchText:
         Parameters
         ----------
         lists - a list of lists containing different tokens
+
+        text - the text to seach over
+
+        substring_len - the desired length of the substring
+        if substring_len == -1 then return substrings of any length
+
         ordered [optional] - whether or not the tokens appear in 
         the order passed in, ordered assumes they do,
         unordered tries every possible combination.
-
+        
         Output
         ------
         Returns all matching substrings
@@ -55,13 +85,32 @@ class MatchText:
         for substring in substrings:
             if substring in text:
                 found_substrings.append(substring)
+        found_substrings = self.filter_by_length(
+            found_substrings, substring_len
+        )
         return found_substrings
 
-    def fuzzy_match(self, substring, text, ordered=True, tolerance=1):
+    def fuzzy_match(self, substring, text, ordered: bool=True, tolerance: int=1):
         """
         Perform a fuzzy match based on edit distance.
         if ordered use levenshtein distance,
         if unordered use damerau levenshtein distance.
+
+        Parameters
+        ----------
+        substring - the substring to match against
+
+        text - the text to seach over
+        
+        ordered [optional] - whether or not the tokens appear in 
+        the order passed in, ordered assumes they do,
+        unordered tries every possible combination.
+
+        tolerance - the maximum edit distance to consider
+        
+        Output
+        ------
+        returns best fuzzy match to the substring
         """
 
         if ordered:
@@ -73,7 +122,7 @@ class MatchText:
         for end_index in range(len(substring), len(text), len(substring)):
             start_index = end_index - len(substring)
             distance = distance_metric(substring, text[start_index:end_index])
-            if distance <=tolerance:
+            if distance <= tolerance:
                 possible_matches.append((substring, distance))
         best_match_distance = tolerance+1
         best_match = ''
@@ -83,7 +132,7 @@ class MatchText:
                 best_match_distance = match[1]
         return best_match
                 
-    def fuzzy_match_lists(self, lists: list, text: str, ordered=True, tolerance=1):
+    def fuzzy_match_lists(self, lists: list, text: str, substring_len: int, ordered: bool=True, tolerance: int=1):
         """
         search a piece of text for all possible fuzzy
         combinations of all tokens of a set of lists.
@@ -92,10 +141,17 @@ class MatchText:
         Parameters
         ----------
         lists - a list of lists containing different tokens
+        
+        text - the text to seach over
+
+        substring_len - the desired length of the substring
+        if substring_len == -1 then return substrings of any length
+        
         ordered [optional] - whether or not the tokens appear in 
         the order passed in, ordered assumes they do,
         unordered tries every possible combination.
 
+        tolerance - the maximum edit distance to consider
         Output
         ------
         Returns all fuzzy matching substrings
@@ -108,4 +164,7 @@ class MatchText:
                                 ordered=ordered,
                                 tolerance=tolerance)
             fuzzy_matches.append(match)
+        fuzzy_matches = self.filter_by_length(
+            fuzzy_matches, substring_len
+        )
         return fuzzy_matches
