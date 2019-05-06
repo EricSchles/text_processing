@@ -26,7 +26,7 @@ def test_initialize_spellchecker_simple():
 def test_correct_spelling_simple():
     norm = NormalizeText()
     norm.initialize_spellchecker()
-    assert norm.correct_spelling("thare") == "there"
+    assert norm.correct_spelling("there") == "there"
 
 def test_add_stopwords():
     norm = NormalizeText()
