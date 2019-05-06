@@ -11,4 +11,4 @@ The goal of this library is to provide a set of common functions for preprocessi
 * lemmatization
 * fuzzy string matching [check]
 
-
+You can find the [docs here](https://text-processing-ml.readthedocs.io/en/latest/)
