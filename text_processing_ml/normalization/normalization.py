@@ -102,7 +102,71 @@ class NormalizeText:
             return new_word, punctuation
         else:
             return new_word
+
+    def correctly_spelled(self, word):
+        """
+        check if word is already spelled correctly, 
+        based on correctly spelled words in our corpus
         
+        Parameter
+        ---------
+        word - the word to be checked
+        
+        Output
+        ------
+        Boolean - True if spelled correctly, False otherwise
+        """
+        return self.spell_checker.spell_checker.known([word])
+
+    def _update_spelling(self, previous_word, word):
+        """
+        Does the spelling update.
+        Notice that if the previous_word == False we use "the" as the previous word.
+        Otherwise we use the previous word to get extra information and
+        through language context, which helps the hmm model guess the
+        right word.
+        
+        Parameters
+        ----------
+        previous_word - the previous word from the current word,
+        we assume the previous word is spelled correctly, because if it
+        wasn't it's spelling has already been updated
+        word - the word to mutate to the correct spelling
+        
+        Output
+        ------
+        The (hopefully) correctly spelled word - a string
+        """
+        if not previous_word:
+            new_word = self.spell_checker.correction("the", word)
+        else:
+            new_word = self.spell_checker.correction(
+                previous_word, word
+            )
+        return new_word
+
+    def _get_previous_word(self, token_index, tokens):
+        """
+        gets the previous token for spell checking.
+        If the current index is 0, we cannot go further back
+        and therefore set the previous_word = False
+        
+        Parameters
+        ----------
+        token_index - the index of the current token
+        tokens - the list of tokens
+        
+        Output
+        ------
+        previous_word - either a boolean set to false
+        or the previous word in the list of tokens
+        """
+        if token_index == 0:
+            previous_word = False
+        else:
+            previous_word = tokens[token_index-1]
+        return previous_word
+    
     def correct_spelling(self, text: str) -> str:
         """
         * Corrects the spelling of likely misspelled words.
@@ -113,22 +177,24 @@ class NormalizeText:
         Parameter
         ---------
         text - string to process
+        
         Output
         ------
         Spell checked string
-        """
-        
+        """        
         tokens = text.split()
         words = []
-        for token in tokens:
+        for token_index in range(len(tokens)):
+            token = tokens[token_index]
             word, punctuation = self.strip_punctuation(token,
                                                        return_punctuation=True)
-            new_word = self.spell_checker.correction(word)
-            if new_word != word:
+            if self.correctly_spelled(word):
+                words.append(token)
+            else:
+                previous_word = self._get_previous_word(token_index, tokens)
+                new_word = self._update_spelling(previous_word, word)
                 new_word += punctuation
                 words.append(new_word)
-            else:
-                words.append(token)
         return " ".join(words)
         
     def correct_whitespace(self, text: str) -> str:
