@@ -34,6 +34,7 @@ class ParseText:
         tfidf_vectorizer = TfidfVectorizer(tokenizer=self.tokenize, stop_words='english')
         return tfidf_vectorizer.fit_transform(text)
 
+    
     # to do
     # add spell checker
     # add tfidf
