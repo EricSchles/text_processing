@@ -47,11 +47,10 @@ class NormalizeText:
         """
         return text.lower()
         
-    def initialize_spellchecker(self, corpus='',
+    def initialize_spellchecker(self, corpus: str='',
                                 corpus_name=False,
-                                words=[],
-                                ner_text='',
-                                add_ner=False):
+                                words: list=[],
+                                ner_text: str=''):
         """
         * Initializes the spellchecker and allows for 
         words that are proper knowns.
@@ -71,8 +70,8 @@ class NormalizeText:
         to not adjust
         """
         nlp = en_core_web_sm.load()
-        if add_ner and text:
-            doc = nlp(text)
+        if ner_text != '':
+            doc = nlp(ner_text)
             words += [entity.text
                       for entity in doc.ents]
         self.spell_checker = SpellCheckerML()
@@ -103,7 +102,7 @@ class NormalizeText:
         else:
             return new_word
 
-    def correctly_spelled(self, word):
+    def correctly_spelled(self, word: str) -> bool:
         """
         check if word is already spelled correctly, 
         based on correctly spelled words in our corpus

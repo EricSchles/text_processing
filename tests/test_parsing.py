@@ -12,9 +12,9 @@ def test_tokenize():
     parser = ParseText()
     assert len(parser.tokenize("Hello there")) == 2
 
-def test_process_text():
+def test_normalize_text():
     parser = ParseText()
-    assert parser.process_text("HeLLo, there") == "hello there"
+    assert parser.normalize_text("HeLLo, there") == "hello there"
 
 def test_tfidf():
     parser = ParseText()

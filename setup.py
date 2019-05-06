@@ -10,7 +10,7 @@ README = (HERE / "README.md").read_text()
 # This call to setup() does all the work
 setup(
     name="text_processing_ml",
-    version="0.2.0",
+    version="0.2.1",
     description="A library for processing text for machine learning",
     long_description=README,
     long_description_content_type="text/markdown",
@@ -30,5 +30,5 @@ setup(
               'text_processing_ml.parsing'
     ],
     include_package_data=True,
-    install_requires=["spacy", "nltk", "spellchecker-ml"],
+    install_requires=["spacy", "nltk", "scikit-learn", "spellchecker-ml"],
 )

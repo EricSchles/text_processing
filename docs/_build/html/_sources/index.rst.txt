@@ -11,7 +11,7 @@ Welcome to Text Processing ML's documentation!
 
    introduction
    getting-started
-   
+   api   
 
 
 Indices and tables
