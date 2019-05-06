@@ -167,7 +167,7 @@ class NormalizeText:
             previous_word = tokens[token_index-1]
         return previous_word
     
-    def correct_spelling(self, text: str) -> str:
+    def make_spelling_correction(self, text: str) -> str:
         """
         * Corrects the spelling of likely misspelled words.
         * Initialized with initialize_spellchecker method.
