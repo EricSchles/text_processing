@@ -10,7 +10,7 @@ README = (HERE / "README.md").read_text()
 # This call to setup() does all the work
 setup(
     name="text_processing_ml",
-    version="0.1.4",
+    version="0.1.7",
     description="A library for processing text for machine learning",
     long_description=README,
     long_description_content_type="text/markdown",
