@@ -24,7 +24,7 @@ class MatchText:
             generate_list_combinations = self.generate_list_combinations_unordered
         final_list = lists[0]
         num_lists = len(lists)
-        for start_index in range(1, num_list-1):
+        for start_index in range(1, num_lists):
             for index in range(1, num_lists):
                 final_list += generate_list_combinations(
                     final_list,
@@ -79,7 +79,7 @@ class MatchText:
         ------
         Returns all matching substrings
         """
-        substrings = combine_lists(lists, ordered=ordered)
+        substrings = self.combine_lists(lists, ordered=ordered)
         text = "".join(text)
         found_substrings = []
         for substring in substrings:
@@ -156,7 +156,7 @@ class MatchText:
         ------
         Returns all fuzzy matching substrings
         """
-        substrings = combine_lists(lists, ordered=ordered)
+        substrings = self.combine_lists(lists, ordered=ordered)
         text = "".join(text)
         fuzzy_matches = []
         for substring in substrings:
