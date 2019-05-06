@@ -1,6 +1,0 @@
-spellchecker-ml
-spacy
-sklearn
-pytest
-nltk
-jellyfish
