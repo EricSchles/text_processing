@@ -35,7 +35,7 @@
 <h1>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="normalization">
 <h2>Normalization<a class="headerlink" href="#normalization" title="Permalink to this headline">¶</a></h2>
-<p>_class_ NormalizeText</p>
+<p>__class__ NormalizeText</p>
 <ul>
 <li><p>Attributes</p>
 <blockquote>
@@ -46,10 +46,10 @@
 </div></blockquote>
 </li>
 </ul>
-<p>_method_ add_to_stopwords(words: list)</p>
+<p>__method__ add_to_stopwords(words: list)</p>
 <p>Add stop words to the stopwords attribute</p>
 <p>usage:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>```python
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>```
 from text_processing_ml.normalization import NormalizeText
 
 normalizer = NormalizeText()
@@ -58,10 +58,10 @@ normalizer.remove_stopwords(&quot;Hello there&quot;) == &#39;&#39;
 ```
 </pre></div>
 </div>
-<p>_method_ remove_stopwords(text: str) -&gt; str</p>
+<p>__method__ remove_stopwords(text: str) -&gt; str</p>
 <p>Remove stop words, those found in stopwords attribute.</p>
 <p>usage:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>```python
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>```
 from text_processing_ml.normalization import NormalizeText
 
 normalizer = NormalizeText()
@@ -70,10 +70,10 @@ normalizer.remove_stopwords(&quot;Hello there&quot;) == &#39;&#39;
 ```
 </pre></div>
 </div>
-<p>_method_ normalize_case(text: str) -&gt; str</p>
+<p>__method__ normalize_case(text: str) -&gt; str</p>
 <p>convert text to lower case</p>
 <p>usage:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>```python
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>```
 
 from text_processing_ml.normalization import NormalizeText
 
@@ -82,10 +82,10 @@ normalizer.normalize_case(&quot;Hello&quot;) # returns &quot;hello&quot;
 ```
 </pre></div>
 </div>
-<p>_method_ initialize_spellchecker(corpus: str, corpus_name: str, words: list, ner_text: str)</p>
+<p>__method__ initialize_spellchecker(corpus: str, corpus_name: str, words: list, ner_text: str)</p>
 <p>Initialize the spellchecker with text to ignore and a corpus to train on, for more directed text correction</p>
 <p>usage:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>```python
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>```
 
 from text_processing_ml.normalization import NormalizeText
 
@@ -98,10 +98,10 @@ normalizer.make_spelling_correction(&quot;Hello there friendz&quot;) # returns &
 ```
 </pre></div>
 </div>
-<p>_method_ strip_punctuation(word: str, return_punctuation: bool) -&gt; str</p>
+<p>__method__ strip_punctuation(word: str, return_punctuation: bool) -&gt; str</p>
 <p>strips out the punctuation from a word. If return_punctuation is True then the punctuation is returned as well, separately.</p>
 <p>usage:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>```python
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>```
 
 from text_processing_ml.normalization import NormalizeText
 
@@ -111,10 +111,10 @@ normalizer.strip_punctuation(&quot;Hello,&quot;, return_punctuation) # returns (
 ```
 </pre></div>
 </div>
-<p>_method_ correctly_spelled(word: str) -&gt; bool</p>
+<p>__method__ correctly_spelled(word: str) -&gt; bool</p>
 <p>Checks if the word is correctly spelled, provided the word appears in spellchecker_ml’s dictionary of words.  Returns False otherwise</p>
 <p>usage:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>```python
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>```
 
 from text_processing_ml.normalization import NormalizeText
 
@@ -123,10 +123,10 @@ normalizer.correctly_spelled(&quot;Helo&quot;) #returns False
 ```
 </pre></div>
 </div>
-<p>_method_ make_spelling_correction(text: str) -&gt; str</p>
+<p>__method__ make_spelling_correction(text: str) -&gt; str</p>
 <p>Correct the spelling of a piece of text using a hidden markov model (for now).</p>
 <p>usage:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>```python
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>```
 
 from text_processing_ml.normalization import NormalizeText
 
@@ -136,10 +136,10 @@ normalizer.make_spelling_correction(&quot;Hello there friendz&quot;) # returns &
 ```
 </pre></div>
 </div>
-<p>_method_ correct_whitespace(text: str) -&gt; str</p>
+<p>__method__ correct_whitespace(text: str) -&gt; str</p>
 <p>Normalizes the white space to one space per token.</p>
 <p>usage:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>```python
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>```
 
 from text_processing_ml.normalization import NormalizeText
 
@@ -155,7 +155,7 @@ normalizer.correct_whitespace(&quot; Hello  there friends  \t whatever&quot;)
 </div>
 <div class="section" id="parsing">
 <h2>Parsing<a class="headerlink" href="#parsing" title="Permalink to this headline">¶</a></h2>
-<p>_class_ ParseText</p>
+<p>__class__ ParseText</p>
 <ul class="simple">
 <li><dl class="simple">
 <dt>Attributes</dt><dd><ul>
@@ -166,14 +166,14 @@ normalizer.correct_whitespace(&quot; Hello  there friends  \t whatever&quot;)
 </dl>
 </li>
 </ul>
-<p>_method_  stem_tokens(tokens: list) -&gt; list</p>
+<p>__method__  stem_tokens(tokens: list) -&gt; list</p>
 <p>Returns a list of stemmed tokens.  Stemming is the process of getting the root word of a word.</p>
 <p>Example:</p>
 <p>runs -&gt; run
 jumping -&gt; jump
 flying -&gt; fly</p>
 <p>usage:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>```python
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>```
 from text_processing_ml.parsing import ParseText
 
 parser = ParseText()
@@ -181,10 +181,10 @@ parser.stem_tokens(&quot;Hello there friends&quot;.split()) # returns Hello ther
 ```
 </pre></div>
 </div>
-<p>_method_ tokenize(text: str) -&gt; list</p>
+<p>__method__ tokenize(text: str) -&gt; list</p>
 <p>Tokenize and stem a string of words into stemmed tokens.</p>
-<p>useage:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>```python
+<p>usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>```
 from text_processing_ml.parsing import ParseText
 
 parser = ParseText()
@@ -192,8 +192,12 @@ parser.tokenize(&quot;Hello there friends&quot;) # [&quot;Hello&quot;, &quot;the
 ```
 </pre></div>
 </div>
-<p>_method_ normalize_text(text: str) -&gt; str</p>
+<p>__method__ normalize_text(text: str) -&gt; str</p>
 <p>Normalize the a piece of text by lower casing it and removing punctuation</p>
+<p>usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>```
+</pre></div>
+</div>
 </div>
 </div>
 
