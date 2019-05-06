@@ -24,15 +24,15 @@ class ParseText:
 
     def process_text(self, text):
         text = text.lower()
-        text = " ".join(
+        return " ".join(
             [self.normalizer.strip_punctuation(word)
              for word in text.split(" ")]
         )
         
-    def tfidf(self, text):
-        text = self.process_text(text)
+    def tfidf(self, documents):
+        documents = [self.process_text(document) for document in documents]
         tfidf_vectorizer = TfidfVectorizer(tokenizer=self.tokenize, stop_words='english')
-        return tfidf_vectorizer.fit_transform(text)
+        return tfidf_vectorizer.fit_transform(documents)
 
     
     # to do

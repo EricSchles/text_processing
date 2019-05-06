@@ -26,7 +26,7 @@ def test_initialize_spellchecker_simple():
 def test_correct_spelling_simple():
     norm = NormalizeText()
     norm.initialize_spellchecker()
-    assert norm.correct_spelling("there") == "there"
+    assert norm.make_spelling_correction("there") == "there"
 
 def test_add_stopwords():
     norm = NormalizeText()
@@ -39,3 +39,19 @@ def test_stopwords():
     norm = NormalizeText()
     assert norm.remove_stopwords("the friends play a ball game") == "friends play ball game"
 
+def test_initialize_spellchecker_with_corpus():
+    norm = NormalizeText()
+    try:
+        norm.initialize_spellchecker()
+        assert True
+    except:
+        assert False
+
+def test_spelled_correctly():
+    norm = NormalizeText()
+    try:
+        norm.initialize_spellchecker(words=["the"])
+        assert norm.spell_checker.spell_checker.known(["the"])
+        assert norm.correctly_spelled("the")
+    except:
+        assert False
